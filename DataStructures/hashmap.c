@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define TABLE_SIZE 10
 
@@ -77,13 +79,36 @@ char *hashmap_get(hash_map *hashmap, const char *key) {
     entry *head = hashmap->entries[slot];
 
     while (head != NULL) {
-        if (head->key == key) {
+        if (strcmp(head->key, key) == 0) {
             return head->value;
         }
         head = head->next;
     }
 
     return NULL;
+}
+
+void hashmap_erase(hash_map *hashmap, const char* key) {
+    unsigned int slot = hash(key);
+    entry *head = hashmap->entries[slot];
+    entry *prev = NULL;
+
+    while (head != NULL) {
+        if (strcmp(head->key, key) == 0) {
+            if (prev == NULL) {
+                hashmap->entries[slot] = head->next;
+            } else {
+                prev->next = head->next;
+            }
+
+            free(head->key);
+            free(head->value);
+            free(head);
+            return;
+        }
+        prev = head;
+        head = head->next;
+    }
 }
 
 void hashmap_free(hash_map *hashmap) {
