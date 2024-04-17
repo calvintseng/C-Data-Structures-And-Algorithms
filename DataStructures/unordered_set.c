@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+//todo: resizing with load factors - recreate map and rebucket them.
+
 unsigned int hash(const char *key) {
     unsigned int length = strlen(key);
     unsigned long int value = 0;
