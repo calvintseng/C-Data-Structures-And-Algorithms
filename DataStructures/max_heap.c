@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <limits.h>
 
-//priority queue is a heap 
-
 typedef struct node {
     int val;
     struct node* left;
