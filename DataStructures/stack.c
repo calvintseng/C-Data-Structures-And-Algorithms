@@ -11,10 +11,7 @@ stack *stack_init(int size) {
     stack *my_stack = malloc(sizeof(stack));
     my_stack->top_ind = -1;
     my_stack->arr = malloc(sizeof(int) * size);
-<<<<<<< HEAD
     my_stack->sz = size;
-=======
->>>>>>> 06af0c3118d8b5e4ba6a6bc47162543aa749f8e7
     for (int i = 0; i < size; ++i) {
         my_stack->arr[i] = -1;
     }
@@ -22,7 +19,6 @@ stack *stack_init(int size) {
 }
 
 void stack_push(stack *my_stack, int val) {
-<<<<<<< HEAD
     if (my_stack->top_ind == my_stack->sz-1) {
         int new_size = my_stack->sz * 2;
         int *new_arr = realloc(my_stack->arr, new_size * sizeof(int));
@@ -33,8 +29,6 @@ void stack_push(stack *my_stack, int val) {
         my_stack->arr = new_arr;
         my_stack->sz = new_size;
     }
-=======
->>>>>>> 06af0c3118d8b5e4ba6a6bc47162543aa749f8e7
     my_stack->arr[++my_stack->top_ind] = val;
 }
 
@@ -50,7 +44,6 @@ int stack_peek(stack *my_stack) {
     return my_stack->arr[my_stack->top_ind];
 }
 
-<<<<<<< HEAD
 void stack_free(stack *my_stack) {
     if (my_stack != NULL) {
         free(my_stack->arr);
@@ -58,8 +51,6 @@ void stack_free(stack *my_stack) {
     }
 }
 
-=======
->>>>>>> 06af0c3118d8b5e4ba6a6bc47162543aa749f8e7
 int main() {
     stack *my_stack = stack_init(100);
     stack_push(my_stack, 10);
@@ -69,8 +60,5 @@ int main() {
     printf("%d\n", stack_peek(my_stack));
     stack_pop(my_stack);
     printf("%d\n", stack_peek(my_stack));
-<<<<<<< HEAD
     stack_free(my_stack);
-=======
->>>>>>> 06af0c3118d8b5e4ba6a6bc47162543aa749f8e7
 }
