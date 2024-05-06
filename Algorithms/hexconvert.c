@@ -4,17 +4,23 @@
 
 char *convert_to_hex(int num) {
     unsigned int val = num;
-    char* vals = "0123456789abcdef";
-    char* res = malloc(sizeof(int) * 8);
-    for (int i = 0; i < 8; ++i) {
-        res[i] = '0';
-    }
-    int ind = 7;
+    char convert[17] = "0123456789abcdef";
+    char rem[100];
+    char *res;
+    int i = 0;
+    int j = 0;
+
+    if (val == 0) return "0";
     while (val) {
-        int temp = val % 16;
-        res[ind--] = vals[temp];
-        temp /= 16;
+        rem[i++] = convert[val%16];
+        val /= 16;
     }
+
+    res = malloc(sizeof(char)*(i+1));
+    for (j = 0; j < i; ++j) {
+        res[j] = rem[i-j-1];
+    }
+    res[j] = '\0';
 
     return res;
 }

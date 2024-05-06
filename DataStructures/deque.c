@@ -110,7 +110,6 @@ void deque_free(deque *mydeque) {
 
 int main() {
     deque *mydeque = deque_init();
-    printf("hello world");
     deque_push_back(mydeque, 3);
     printf("%d\n", deque_peek_front(mydeque));
     deque_push_back(mydeque, 5);
