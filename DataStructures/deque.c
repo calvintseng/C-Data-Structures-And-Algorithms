@@ -26,24 +26,11 @@ node *node_init(int val) {
 deque *deque_init() {
     deque *mydeque = malloc(sizeof(deque));
     mydeque->sz = 0;
-    node *dummy = node_init(-1);
-    mydeque->head = dummy;
-    mydeque->tail = dummy;
+    mydeque->head = node_init(-1);
+    mydeque->tail = node_init(-1);
+    mydeque->head->next = mydeque->tail;
+    mydeque->tail->prev = mydeque->head;
     return mydeque;
-}
-
-void deque_push_back(deque *mydeque, int val) {
-    node *insert = node_init(val);
-    if (mydeque->sz == 0) {
-        mydeque->head->next = insert;
-        insert->prev = mydeque->head;
-    }
-    node* back = mydeque->tail->prev;
-    back->next = insert;
-    insert->prev = back;
-    insert->next = mydeque->tail->prev;
-    mydeque->tail->prev = insert;
-    mydeque->sz++;
 }
 
 void deque_push_front(deque *mydeque, int val) {
@@ -57,6 +44,20 @@ void deque_push_front(deque *mydeque, int val) {
     insert->next = front;
     insert->prev = mydeque->head;
     mydeque->head->next = insert;
+    mydeque->sz++;
+}
+
+void deque_push_back(deque *mydeque, int val) {
+    node *insert = node_init(val);
+    if (mydeque->sz == 0) {
+        mydeque->head->next = insert;
+        insert->prev = mydeque->head;
+    }
+    node* back = mydeque->tail->prev;
+    back->next = insert;
+    insert->prev = back;
+    insert->next = mydeque->tail->prev;
+    mydeque->tail->prev = insert;
     mydeque->sz++;
 }
 
@@ -81,7 +82,6 @@ void deque_pop_back(deque *mydeque) {
     free(back);
     mydeque->sz--;
 }
-
 
 int deque_peek_front(deque *mydeque) {
     if (mydeque->sz == 0) {
